@@ -7,14 +7,19 @@
 
 import SwiftUI
 
+// SwiftUI Integration
+struct CameraViewControllerWrapper: UIViewControllerRepresentable {
+    func makeUIViewController(context: Context) -> ViewController {
+        return ViewController()
+    }
+    
+    func updateUIViewController(_ uiViewController: ViewController, context: Context) {}
+}
+
+// SwiftUI ContentView
 struct ContentView: View {
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
-        }
-        .padding()
+        CameraViewControllerWrapper()
+            .edgesIgnoringSafeArea(.all)
     }
 }

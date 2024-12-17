@@ -9,5 +9,4 @@ target 'PullPal' do
   # If you want to use the base implementation:
   pod 'GoogleMLKit/PoseDetection', '7.0.0'
 
-
 end
