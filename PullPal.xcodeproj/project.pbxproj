@@ -6,8 +6,15 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		7B3DADA8B84B57F64A24D265 /* Pods_PullPal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 430B8E65BE600E507251FCD0 /* Pods_PullPal.framework */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		09C53EEE2D114F36004D9C5A /* PullPal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PullPal.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		2868522633B30CE3D4BE3071 /* Pods-PullPal.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PullPal.debug.xcconfig"; path = "Target Support Files/Pods-PullPal/Pods-PullPal.debug.xcconfig"; sourceTree = "<group>"; };
+		430B8E65BE600E507251FCD0 /* Pods_PullPal.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PullPal.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FA3A3B24C52DAEE7DEDFC752 /* Pods-PullPal.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PullPal.release.xcconfig"; path = "Target Support Files/Pods-PullPal/Pods-PullPal.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -23,6 +30,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7B3DADA8B84B57F64A24D265 /* Pods_PullPal.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -34,6 +42,8 @@
 			children = (
 				09C53EF02D114F36004D9C5A /* PullPal */,
 				09C53EEF2D114F36004D9C5A /* Products */,
+				BD8729F8D80BC238406D564F /* Pods */,
+				4DD01E6741321B422694318F /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -45,6 +55,23 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		4DD01E6741321B422694318F /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				430B8E65BE600E507251FCD0 /* Pods_PullPal.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		BD8729F8D80BC238406D564F /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				2868522633B30CE3D4BE3071 /* Pods-PullPal.debug.xcconfig */,
+				FA3A3B24C52DAEE7DEDFC752 /* Pods-PullPal.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -52,9 +79,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 09C53EFC2D114F38004D9C5A /* Build configuration list for PBXNativeTarget "PullPal" */;
 			buildPhases = (
+				6DA3A0D9433EDBDBA4F27302 /* [CP] Check Pods Manifest.lock */,
 				09C53EEA2D114F36004D9C5A /* Sources */,
 				09C53EEB2D114F36004D9C5A /* Frameworks */,
 				09C53EEC2D114F36004D9C5A /* Resources */,
+				64560201C9B446E77B680977 /* [CP] Embed Pods Frameworks */,
+				B488887A87E5D03B3EE15EDB /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -64,8 +94,6 @@
 				09C53EF02D114F36004D9C5A /* PullPal */,
 			);
 			name = PullPal;
-			packageProductDependencies = (
-			);
 			productName = PullPal;
 			productReference = 09C53EEE2D114F36004D9C5A /* PullPal.app */;
 			productType = "com.apple.product-type.application";
@@ -113,6 +141,65 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		64560201C9B446E77B680977 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-PullPal/Pods-PullPal-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-PullPal/Pods-PullPal-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-PullPal/Pods-PullPal-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		6DA3A0D9433EDBDBA4F27302 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-PullPal-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B488887A87E5D03B3EE15EDB /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-PullPal/Pods-PullPal-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-PullPal/Pods-PullPal-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-PullPal/Pods-PullPal-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		09C53EEA2D114F36004D9C5A /* Sources */ = {
@@ -162,7 +249,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -177,7 +264,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -225,7 +312,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -234,7 +321,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
@@ -246,12 +333,14 @@
 		};
 		09C53EFD2D114F38004D9C5A /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2868522633B30CE3D4BE3071 /* Pods-PullPal.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"PullPal/Preview Content\"";
+				DEVELOPMENT_TEAM = 79MD6HB8AR;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -274,12 +363,14 @@
 		};
 		09C53EFE2D114F38004D9C5A /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = FA3A3B24C52DAEE7DEDFC752 /* Pods-PullPal.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"PullPal/Preview Content\"";
+				DEVELOPMENT_TEAM = 79MD6HB8AR;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
