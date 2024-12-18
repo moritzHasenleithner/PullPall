@@ -18,6 +18,24 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
     private let poseDetector: PoseDetector = PoseDetector.poseDetector(options: PoseDetectorOptions())
     private var poseOverlayLayer: CAShapeLayer!
    
+   private var lastPixelBufferSize: CGSize?
+   
+   // Define the connections (pairs of landmarks) to draw lines between
+   private let poseConnections: [(PoseLandmarkType, PoseLandmarkType)] = [
+       (.leftShoulder, .leftElbow),
+       (.leftElbow, .leftWrist),
+       (.rightShoulder, .rightElbow),
+       (.rightElbow, .rightWrist),
+       (.leftShoulder, .rightShoulder),
+       (.leftHip, .leftKnee),
+       (.leftKnee, .leftAnkle),
+       (.rightHip, .rightKnee),
+       (.rightKnee, .rightAnkle),
+       (.leftShoulder, .leftHip),
+       (.rightShoulder, .rightHip),
+       (.leftHip, .rightHip)
+   ]
+   
     override func viewDidLoad() {
         super.viewDidLoad()
         setupCameraSession()
@@ -70,9 +88,14 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
     }
 
     private func setupPoseOverlayLayer() {
+       if poseOverlayLayer != nil {
+          poseOverlayLayer.removeFromSuperlayer()
+       }
+       
         poseOverlayLayer = CAShapeLayer()
         poseOverlayLayer.frame = view.bounds
         poseOverlayLayer.strokeColor = UIColor.red.cgColor
+       poseOverlayLayer.lineWidth = 2.0
         poseOverlayLayer.fillColor = UIColor.clear.cgColor
         view.layer.addSublayer(poseOverlayLayer)
     }
@@ -80,6 +103,11 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
     // MARK: - Pose Detection
     func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
         guard let pixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer) else { return }
+       // Store the pixel buffer size for coordinate conversions
+       let width = CGFloat(CVPixelBufferGetWidth(pixelBuffer))
+       let height = CGFloat(CVPixelBufferGetHeight(pixelBuffer))
+       lastPixelBufferSize = CGSize(width: width, height: height)
+
         let visionImage = VisionImage(buffer: sampleBuffer)
         visionImage.orientation = imageOrientation()
         
@@ -96,19 +124,42 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
     }
 
     private func drawPoses(poses: [Pose]) {
-        let path = UIBezierPath()
-        for pose in poses {
-            for landmark in pose.landmarks {
-                let previewWidth = videoPreviewLayer.bounds.width
-                let previewHeight = videoPreviewLayer.bounds.height
+       guard let pixelBufferSize = lastPixelBufferSize else {
+           return
+       }
 
-                let x = CGFloat(landmark.position.x) / CGFloat(pose.landmarks.count)
-                let y = CGFloat(landmark.position.y) * CGFloat(previewHeight)
-                let point = CGPoint(x: x, y: y)
-                //let point = videoPreviewLayer.layerPointConverted(fromCaptureDevicePoint: CGPoint(x: landmark.position.x, y: landmark.position.y))
-                path.append(UIBezierPath(arcCenter: point, radius: 5, startAngle: 0, endAngle: 2 * .pi, clockwise: true))
-            }
-        }
+       let path = UIBezierPath()
+
+       for pose in poses {
+           // Create a dictionary of landmarkType to CGPoint for easy lookup
+           var landmarkPoints: [PoseLandmarkType: CGPoint] = [:]
+
+           for landmark in pose.landmarks {
+               // Normalize coordinates
+               let normalizedX = landmark.position.x / pixelBufferSize.width
+               let normalizedY = landmark.position.y / pixelBufferSize.height
+               let normalizedPoint = CGPoint(x: normalizedX, y: normalizedY)
+
+               // Convert to preview coordinates
+               let point = videoPreviewLayer.layerPointConverted(fromCaptureDevicePoint: normalizedPoint)
+
+               // Store for later line drawing
+               landmarkPoints[landmark.type] = point
+
+               // Draw a small circle for each landmark
+               path.append(UIBezierPath(arcCenter: point, radius: 5,
+                                        startAngle: 0, endAngle: 2 * .pi, clockwise: true))
+           }
+
+           // Now connect the defined landmark pairs with lines
+           for (startType, endType) in poseConnections {
+               if let startPoint = landmarkPoints[startType],
+                  let endPoint = landmarkPoints[endType] {
+                   path.move(to: startPoint)
+                   path.addLine(to: endPoint)
+               }
+           }
+       }
         
         DispatchQueue.main.async {
             self.poseOverlayLayer.path = path.cgPath
@@ -135,6 +186,7 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
         toggleButton.backgroundColor = UIColor.systemBlue
         toggleButton.setTitleColor(.white, for: .normal)
         view.addSubview(toggleButton)
+       view.bringSubviewToFront(toggleButton)
     }
 
     @objc private func toggleCamera() {

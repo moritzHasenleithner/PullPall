@@ -340,7 +340,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"PullPal/Preview Content\"";
-				DEVELOPMENT_TEAM = 79MD6HB8AR;
+				DEVELOPMENT_TEAM = BCJHZNH4HK;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSCameraUsageDescription = "This app requires access to the camera to detect pull-ups.";
@@ -371,7 +371,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"PullPal/Preview Content\"";
-				DEVELOPMENT_TEAM = 79MD6HB8AR;
+				DEVELOPMENT_TEAM = BCJHZNH4HK;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSCameraUsageDescription = "This app requires access to the camera to detect pull-ups.";
